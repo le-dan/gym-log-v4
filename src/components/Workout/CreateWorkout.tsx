@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import { Muscle } from "../../util/interfaces";
 import { MenuItem, Modal } from "@mui/material";
 import ExerciseAccordion from "./ExerciseAccordion";
-import { AnimatePresence, delay, motion, useAnimate } from "motion/react";
+import { AnimatePresence, delay, motion } from "motion/react";
 import { PartyPopper } from "lucide-react";
 export default function CreateWorkout() {
 	const styles = {
