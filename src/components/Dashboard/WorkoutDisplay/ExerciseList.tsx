@@ -11,9 +11,18 @@ interface ExerciseListProps {
 export default function ExerciseList({ workout, exercises, chosenExercise, setChosenExercise }: ExerciseListProps) {
 	const renderExercises = () => {
 		const exerciseElements = exercises.map((exercise) => {
-			return <ExerciseCard key={exercise.name} workout={workout} exercise={exercise} exercises={exercises} chosenExercise={chosenExercise} setChosenExercise={setChosenExercise} />;
+			return (
+				<ExerciseCard
+					key={exercise.name}
+					workout={workout}
+					exercise={exercise}
+					exercises={exercises}
+					chosenExercise={chosenExercise}
+					setChosenExercise={setChosenExercise}
+				/>
+			);
 		});
 		return exerciseElements;
 	};
-	return <div className="h-full w-1/4 px-3 flex flex-col gap-3 shrink-0">{renderExercises()}</div>;
+	return <div className="h-full w-1/5 p-5 flex flex-col gap-4 shrink-0 inset-shadow-primary/50 inset-shadow-sm rounded-lg">{renderExercises()}</div>;
 }

@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-	--color-snow-white: #F8F8FF;
-	--color-snow-white-dark: #EDEDF5;
+	--color-snow-white: #f8f8ff;
+	--color-snow-white-dark: #ededf5;
 	--color-primary: #2d336b;
 	--color-accent: #7886c7;
 	--color-text: #352f36;
-	--color-input-box: #EDEDF5;
+	--color-input-box: #ededf5;
 }
 
 @layer components {
@@ -72,4 +72,9 @@ body,
 .App {
 	height: 100%;
 	overflow: hidden;
+}
+
+.rainbow-box {
+	background: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+	border-image-slice: 1;
 }

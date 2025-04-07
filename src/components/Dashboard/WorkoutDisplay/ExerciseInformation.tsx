@@ -44,7 +44,7 @@ export default function ExerciseInformation({ chosenExercise, exercises, setExer
 	};
 
 	return chosenExercise ? (
-		<div className="h-full w-full pl-5 flex flex-col gap-10 select-none min-h-0" key={chosenExercise.name}>
+		<div className="h-full w-full p-10 flex flex-col gap-10 select-none min-h-0 shadow-lg shadow-primary/30 rounded-lg" key={chosenExercise.name}>
 			<span className="text-6xl md:text-4xl text-primary font-bold">{chosenExercise.name}</span>
 			<span className="flex text-lg font-semibold flex-col">
 				<span className="font-black">MUSCLES WORKED</span>
