@@ -14,7 +14,7 @@ export default function WorkoutGrid() {
 					className="bg-snow-white drop-shadow-lg rounded-lg h-35 w-[340px] justify-between items-center hover:scale-105 hover:shadow-md hover:shadow-accent ease-in-out duration-300 hover:cursor-pointer p-6 flex gap-5"
 					key={index}
 					to={"/dashboard/" + workout.name.replace(" ", "").toLowerCase()}
-					state={{workout: workout, exercises: workout.exercises}}
+					state={{ workout: workout, exercises: workout.exercises }}
 				>
 					<div className="flex-col flex shrink-0 max-w-19">
 						<span className="font-bold">{workout.name}</span>
@@ -54,26 +54,28 @@ export default function WorkoutGrid() {
 	return (
 		<>
 			<NavBar />
-			<div className="h-full w-full bg-snow-white p-10 shadow-lg rounded-lg flex flex-col gap-10 text-text min-h-0">
-				<span className="text-4xl font-bold text-primary">choose a workout for today,</span>
-				{workouts.length > 0 ? (
-					<div
-						className="min-h-0 h-full w-full grid grid-rows-[repeat(auto-fill,_minmax(140px,1fr))] grid-cols-[repeat(auto-fill,_minmax(330px,1fr))] gap-8 overflow-y-auto p-4"
-						style={{ scrollbarGutter: "stable both-edges" }}
-					>
-						{renderWorkouts(workouts)}
-					</div>
-				) : (
-					<div className="h-full w-full flex justify-center items-center flex-col text-primary/60  text-4xl gap-12">
-						There are no custom workouts yet! Bummer! :(
-						<NavLink
-							to="/workout/create"
-							className="text-xl py-3 px-5 w-fit bg-primary text-snow-white hover-css rounded-xl hover:bg-accent hover:cursor-pointer hover:scale-105 ease-in-out"
+			<div className="h-full w-full flex items-center justify-center">
+				<div className="h-[80%] w-[80%] bg-snow-white p-10 shadow-lg rounded-lg flex flex-col gap-10 text-text min-h-0">
+					<span className="text-4xl font-bold text-primary">choose a workout for today,</span>
+					{workouts.length > 0 ? (
+						<div
+							className="min-h-0 h-full w-full grid grid-rows-[repeat(auto-fill,_minmax(140px,1fr))] grid-cols-[repeat(auto-fill,_minmax(330px,1fr))] gap-8 overflow-y-auto p-4"
+							style={{ scrollbarGutter: "stable both-edges" }}
 						>
-							create workout
-						</NavLink>
-					</div>
-				)}
+							{renderWorkouts(workouts)}
+						</div>
+					) : (
+						<div className="h-full w-full flex justify-center items-center flex-col text-primary/60  text-4xl gap-12">
+							There are no custom workouts yet! Bummer! :(
+							<NavLink
+								to="/workout/create"
+								className="text-xl py-3 px-5 w-fit bg-primary text-snow-white hover-css rounded-xl hover:bg-accent hover:cursor-pointer hover:scale-105 ease-in-out"
+							>
+								create workout
+							</NavLink>
+						</div>
+					)}
+				</div>
 			</div>
 		</>
 	);

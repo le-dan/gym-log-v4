@@ -4,9 +4,10 @@ import WorkoutOverview from "./WorkoutDisplay/WorkoutOverview";
 import ExerciseList from "./WorkoutDisplay/ExerciseList";
 import { useEffect, useState } from "react";
 import ExerciseInformation from "./WorkoutDisplay/ExerciseInformation";
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import { Route, Routes, useBlocker, useLocation, useNavigate } from "react-router";
 import { useStopwatch } from "react-timer-hook";
 import { CircleArrowLeft, CirclePause, CirclePlay } from "lucide-react";
+import { Modal } from "@mui/material";
 
 export default function WorkoutDisplay() {
 	const currentDay = dayjs();
@@ -15,8 +16,17 @@ export default function WorkoutDisplay() {
 	const location = useLocation();
 
 	const workout: WorkoutInterface = location.state.workout;
+	const [modalOpen, setModalOpen] = useState(false);
 	const [exercises, setExercises] = useState<Exercise[]>(location.state.exercises);
 	const [chosenExercise, setChosenExercise] = useState<Exercise | undefined>();
+
+	const blocker = useBlocker(true);
+
+	useEffect(() => {
+		if (blocker.state === "blocked") {
+			setModalOpen(true);
+		}
+	}, [blocker]);
 
 	const stopwatch = useStopwatch({ autoStart: true });
 
@@ -36,7 +46,7 @@ export default function WorkoutDisplay() {
 			for (let i = 0; i < exercises.length; i++) {
 				if (exercises[i].setsCompleted < exercises[i].sets) {
 					console.log(exercises);
-					
+
 					setChosenExercise(exercises[i]);
 					navigate(`/dashboard/${workout.name}/${exercises[i].name.replace(" ", "").toLowerCase()}`, {
 						state: { workout: workout, exercises: exercises },
@@ -94,6 +104,25 @@ export default function WorkoutDisplay() {
 					/>
 				</Routes>
 			</div>
+			<Modal open={modalOpen} disableAutoFocus className="flex items-center justify-center text-primary text-center">
+				<div className="bg-snow-white w-1/4 h-1/4 rounded-3xl p-10 text-4xl font-semibold flex flex-col">
+					Are you sure you want to exit without finishing the workout?
+					<div className="mt-auto w-full flex gap-10 justify-center text-xl font-semibold">
+						<button
+							onClick={() => blocker.proceed && blocker.proceed()}
+							className="hover-css bg-primary text-snow-white rounded-lg px-3 py-2 hover:bg-accent"
+						>
+							Confirm
+						</button>
+						<button
+							onClick={() => setModalOpen(false)}
+							className="hover-css border-primary border-2 text-primary rounded-lg px-3 py-2 hover:border-accent hover:text-accent"
+						>
+							Cancel
+						</button>
+					</div>
+				</div>
+			</Modal>
 		</div>
 	);
 }

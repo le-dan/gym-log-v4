@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-	--color-snow-white: #fff2f2;
-	--color-snow-white-dark: #fff0f0;
+	--color-snow-white: #F8F8FF;
+	--color-snow-white-dark: #EDEDF5;
 	--color-primary: #2d336b;
 	--color-accent: #7886c7;
 	--color-text: #352f36;
-	--color-input-box: #fdecef;
+	--color-input-box: #EDEDF5;
 }
 
 @layer components {
