@@ -33,9 +33,9 @@ export default function ExerciseInformation({ chosenExercise, exercises, setExer
 				setDivs.push(<SetCard key={i} exerciseName={chosenExercise.name} exercises={exercises} setExercises={setExercises} />);
 			}
 			return (
-				<div className="flex flex-col gap-4 min-h-0 h-full" key={chosenExercise.name}>
-					<span className="text-2xl md:text-lg font-black min-h-0">
-						{exercise && exercise.setsCompleted}/{chosenExercise.sets} SETS
+				<div className="flex flex-col gap-6 min-h-0 h-full" key={chosenExercise.name}>
+					<span className="text-2xl md:text-lg font-semibold min-h-0">
+						{exercise && exercise.setsCompleted}/{chosenExercise.sets} sets completed
 					</span>
 					<div className="flex flex-col gap-3 min-h-0 overflow-y-auto h-full grow-0 shrink">{setDivs}</div>
 				</div>
@@ -46,8 +46,8 @@ export default function ExerciseInformation({ chosenExercise, exercises, setExer
 	return chosenExercise ? (
 		<div className="h-full w-full p-10 flex flex-col gap-10 select-none min-h-0 shadow-lg shadow-primary/30 rounded-lg" key={chosenExercise.name}>
 			<span className="text-6xl md:text-4xl text-primary font-bold">{chosenExercise.name}</span>
-			<span className="flex text-lg font-semibold flex-col">
-				<span className="font-black">MUSCLES WORKED</span>
+			<span className="flex text-lg flex-col">
+				<span className="font-semibold">MUSCLES WORKED</span>
 				{chosenExercise.musclesWorked.reduce((str, muscle) => (str += muscle.toUpperCase() + " "), "")}
 			</span>
 			<div className="text-2xl md:text-lg flex flex-col select-text" hidden={chosenExercise.notes.length === 0}>

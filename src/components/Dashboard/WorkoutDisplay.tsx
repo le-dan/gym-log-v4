@@ -51,8 +51,6 @@ export default function WorkoutDisplay() {
 			// go to next available exercise
 			for (let i = 0; i < exercises.length; i++) {
 				if (exercises[i].setsCompleted < exercises[i].sets) {
-					console.log(exercises);
-
 					setChosenExercise(exercises[i]);
 					navigate(`/dashboard/${workout.name}/${exercises[i].name.replace(" ", "").toLowerCase()}`, {
 						state: { workout: workout, exercises: exercises },
@@ -92,8 +90,8 @@ export default function WorkoutDisplay() {
 					</Routes>
 				</div>
 				<Modal open={modalOpen} disableAutoFocus className="flex items-center justify-center text-primary text-center">
-					<div className="bg-snow-white w-1/4 h-1/4 rounded-3xl p-10 text-4xl font-semibold flex flex-col">
-						Are you sure you want to exit without finishing the workout?
+					<div className="bg-snow-white w-1/3 h-1/4 rounded-3xl p-9 text-4xl font-semibold flex flex-col">
+						Are you sure you want to exit without finishing?
 						<div className="mt-auto w-full flex gap-10 justify-center text-xl font-semibold">
 							<button
 								onClick={() => blocker.proceed && blocker.proceed()}

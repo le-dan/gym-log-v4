@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Square, SquareCheck } from "lucide-react";
 import { useState } from "react";
 import { Exercise } from "../../../util/interfaces";
 
@@ -25,19 +25,17 @@ export default function SetCard({ exerciseName, exercises, setExercises }: SetCa
 		setCompleted(!completed);
 	}
 
-	return exercises ? (
+	return (
 		<div
-			className={`w-[95%] bg-snow-white shadow-lg rounded-lg flex hover:scale-101 hover-css duration-100
-            ${completed ? "hidden cursor-none" : ""}
+			className={`w-[30%] bg-snow-white shadow-sm shadow-accent rounded-lg flex hover:scale-101 hover-css duration-100
+            ${completed ? "opacity-30" : ""}
             `}
 			onClick={handleCardClick}
 		>
-			<div className="py-3 px-3 font-bold">{exercises[exerciseIndex].reps} reps</div>
+			<div className="py-3 px-3 font-semibold w-full text-center">{exercises[exerciseIndex].reps} repetitions</div>
 			<div className="bg-primary ml-auto rounded-r-lg text-snow-white px-3 flex items-center justify-center">
-				<Check size={30} />
+				{completed ? <SquareCheck size={30} /> : <Square size={30} />}
 			</div>
 		</div>
-	) : (
-		<></>
 	);
 }
