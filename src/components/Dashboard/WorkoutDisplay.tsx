@@ -75,39 +75,43 @@ export default function WorkoutDisplay() {
 	}, [exercises]);
 
 	return (
-		<div className="rounded-lg h-full w-full flex flex-col gap-5 bg-snow-white shadow-2xl text-text">
-			<div className="flex items-center justify-center rounded-t-lg shadow-sm text-primary py-5 px-10 h-35 md:h-25 w-full gap-3">
-				<WorkoutOverview currentDay={currentDay} workout={workout} />
-			</div>
-			<div className={`${!stopwatch.isRunning ? "opacity-50 select-none pointer-events-none" : ""} flex h-full gap-10 p-5 min-h-0`}>
-				<ExerciseList workout={workout} exercises={exercises} chosenExercise={chosenExercise} setChosenExercise={setChosenExercise} />
-				<Routes>
-					<Route
-						path={`:exercise`}
-						element={<ExerciseInformation chosenExercise={chosenExercise} exercises={exercises} setExercises={setExercises} />}
-					/>
-				</Routes>
-			</div>
-			<Modal open={modalOpen} disableAutoFocus className="flex items-center justify-center text-primary text-center">
-				<div className="bg-snow-white w-1/4 h-1/4 rounded-3xl p-10 text-4xl font-semibold flex flex-col">
-					Are you sure you want to exit without finishing the workout?
-					<div className="mt-auto w-full flex gap-10 justify-center text-xl font-semibold">
-						<button
-							onClick={() => blocker.proceed && blocker.proceed()}
-							className="hover-css bg-primary text-snow-white rounded-lg px-3 py-2 hover:bg-accent"
-						>
-							Confirm
-						</button>
-						<button
-							onClick={() => setModalOpen(false)}
-							className="hover-css border-primary border-2 text-primary rounded-lg px-3 py-2 hover:border-accent hover:text-accent"
-						>
-							Cancel
-						</button>
-					</div>
+		<>
+			<WorkoutOverview currentDay={currentDay} workout={workout} exercises={exercises} stopwatch={stopwatch} />
+			<div
+				className={`${
+					!stopwatch.isRunning ? "opacity-30 select-none pointer-events-none" : ""
+				} rounded-lg h-full w-full flex flex-col gap-5 bg-snow-white shadow-2xl text-text duration-300 ease-in-out`}
+			>
+				<div className={`flex h-full gap-10 p-5 min-h-0`}>
+					<ExerciseList workout={workout} exercises={exercises} chosenExercise={chosenExercise} setChosenExercise={setChosenExercise} />
+					<Routes>
+						<Route
+							path={`:exercise`}
+							element={<ExerciseInformation chosenExercise={chosenExercise} exercises={exercises} setExercises={setExercises} />}
+						/>
+					</Routes>
 				</div>
-			</Modal>
-		</div>
+				<Modal open={modalOpen} disableAutoFocus className="flex items-center justify-center text-primary text-center">
+					<div className="bg-snow-white w-1/4 h-1/4 rounded-3xl p-10 text-4xl font-semibold flex flex-col">
+						Are you sure you want to exit without finishing the workout?
+						<div className="mt-auto w-full flex gap-10 justify-center text-xl font-semibold">
+							<button
+								onClick={() => blocker.proceed && blocker.proceed()}
+								className="hover-css bg-primary text-snow-white rounded-lg px-3 py-2 hover:bg-accent"
+							>
+								Confirm
+							</button>
+							<button
+								onClick={() => setModalOpen(false)}
+								className="hover-css border-primary border-2 text-primary rounded-lg px-3 py-2 hover:border-accent hover:text-accent"
+							>
+								Cancel
+							</button>
+						</div>
+					</div>
+				</Modal>
+			</div>
+		</>
 		// <div className="rounded-lg h-full w-full flex flex-col gap-5 bg-snow-white shadow-2xl text-text">
 		// 	<div className="flex justify-center items-center rounded-t-lg shadow-sm text-primary shadow-primary py-5 px-10 h-45 md:h-35 w-full gap-3">
 		// 		<CircleArrowLeft size={75} className="mr-auto hover-css text-red-400 hover:text-accent" onClick={() => navigate("/dashboard")} />
