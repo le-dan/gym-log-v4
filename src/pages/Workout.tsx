@@ -32,7 +32,16 @@ export default function Workout() {
 					<div className="rounded-xl hover-css p-5 h-full w-full flex flex-col bg-snow-white shadow-2xl shadow-primary text-text hover:bg-accent hover:cursor-pointer transform transition-transform duration-300 hover:scale-105" key={workout.name}>
 						<div className="flex items-center justify-between mb-4 h-full w-full">
 							<h2 className="text-4xl font-semibold">{workout.name}</h2>
-							<button onClick={() => handleRemoveButton(workout.name)} className="text-red-500 hover:text-red-700 font-bold text-2xl p-2">X</button>
+							<button
+								onClick={() => {
+									if (window.confirm(`Are you sure you want to delete the workout "${workout.name}"?`)) {
+										handleRemoveButton(workout.name);
+									}
+								}}
+								className="text-red-500 hover:text-red-700 font-bold text-2xl p-2"
+							>
+								X
+							</button>
 						</div>
 						<div className="flex flex-col gap-2 text-xl">
 							Exercises: 

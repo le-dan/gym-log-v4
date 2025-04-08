@@ -86,10 +86,10 @@ export default function CreateWorkout() {
 	}
 
 	return (
-		<div className="h-full w-full flex text-primary border-primary items-center justify-center gap-50 py-20">
-			<form className="flex flex-col h-full w-1/3 gap-10 shrink-0 overflow-y-auto items-center bg-snow-white p-10 rounded-2xl shadow-2xl shadow-primary">
-				<h1 className="text-4xl font-semibold">Create a New Workout</h1>
-				<label className="text-xl w-full flex flex-col gap-4">
+		<div className="h-full w-full flex flex-col lg:flex-row text-primary border-primary items-center justify-center gap-10 lg:gap-50 py-10 lg:py-20">
+			<form className="flex flex-col h-full w-full lg:w-1/3 gap-6 lg:gap-10 shrink-0 overflow-y-auto items-center bg-snow-white p-6 lg:p-10 rounded-2xl shadow-2xl shadow-primary">
+				<h1 className="text-2xl lg:text-4xl font-semibold text-center">Create a New Workout</h1>
+				<label className="text-lg lg:text-xl w-full flex flex-col gap-2 lg:gap-4">
 					Workout Name
 					<input
 						id="nameInput"
@@ -109,21 +109,24 @@ export default function CreateWorkout() {
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 							transition={{ duration: 0.2 }}
-							className="flex flex-col gap-4 w-full h-full"
+							className="flex flex-col gap-4 lg:gap-6 w-full h-full"
 						>
 							<div className="flex justify-between items-center">
-								<h2 className="text-xl">Add Exercise</h2>
+								<h2 className="text-lg lg:text-xl">Add Exercise</h2>
 								<button
 									type="button"
-									className="bg-primary text-white p-1 w-30 rounded-md hover-css hover:bg-accent"
-									onClick={() => handleAddExercise()}
+									className="bg-primary text-white p-1 w-24 lg:w-30 rounded-md hover-css hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
+									disabled={!exerciseName || sets <= 0 || reps <= 0 || muscles.length === 0}
+									onClick={() => {
+										handleAddExercise();
+									}}
 								>
 									Add
 								</button>
 							</div>
-							<div className="flex flex-col items-center gap-8">
-								<div className="flex flex-col w-full gap-2 border p-4">
-									<label className="text-lg">
+							<div className="flex flex-col items-center gap-6 lg:gap-8">
+								<div className="flex flex-col w-full gap-2 lg:gap-4 border p-4">
+									<label className="text-base lg:text-lg">
 										Exercise Name
 										<input
 											id="exerciseNameInput"
@@ -135,8 +138,8 @@ export default function CreateWorkout() {
 											onChange={(e) => setExerciseName(e.target.value)}
 										/>
 									</label>
-									<div className="flex gap-4 justify-evenly">
-										<label className="text-lg w-full">
+									<div className="flex flex-col lg:flex-row gap-4 justify-evenly">
+										<label className="text-base lg:text-lg w-full">
 											Sets
 											<input
 												id="setsInput"
@@ -147,7 +150,7 @@ export default function CreateWorkout() {
 												onChange={(e) => setSets(Number.parseInt(e.target.value))}
 											/>
 										</label>
-										<label className="text-lg w-full">
+										<label className="text-base lg:text-lg w-full">
 											Repetitions
 											<input
 												id="repsInput"
@@ -161,7 +164,7 @@ export default function CreateWorkout() {
 											/>
 										</label>
 									</div>
-									<label className="text-lg">
+									<label className="text-base lg:text-lg">
 										Muscles Worked
 										<Select
 											multiple
@@ -201,7 +204,7 @@ export default function CreateWorkout() {
 											})}
 										</Select>
 									</label>
-									<label className="text-lg">
+									<label className="text-base lg:text-lg">
 										Notes
 										<input
 											id="notesInput"
@@ -225,15 +228,15 @@ export default function CreateWorkout() {
 							animate={{ opacity: 1, scale: 1 }}
 							exit={{ opacity: 0, scale: 0 }}
 							transition={{ duration: 0.75, type: "spring", bounce: 0.4 }}
-							className="w-full h-full flex flex-col gap-10 text-3xl font-semibold justify-center items-center"
+							className="w-full h-full flex flex-col gap-6 lg:gap-10 text-2xl lg:text-3xl font-semibold justify-center items-center"
 						>
-							<PartyPopper size={150} />
+							<PartyPopper size={100}/>
 							Exercise Added
 						</motion.div>
 					)}
 				</AnimatePresence>
 				<button
-					className="bg-primary text-white p-2 hover:bg-accent hover-css rounded-md w-50 disabled:opacity-50 disabled:pointer-events-none mt-auto"
+					className="bg-primary text-white p-2 hover:bg-accent hover-css rounded-md w-full lg:w-50 disabled:opacity-50 disabled:pointer-events-none mt-auto"
 					disabled={exercises.length === 0}
 					onClick={async (e) => {
 						e.preventDefault();
@@ -245,12 +248,12 @@ export default function CreateWorkout() {
 			</form>
 			{exercises.length > 0 ? (
 				<motion.div
-					className="h-full w-2/5 flex flex-col gap-10 bg-snow-white p-10 rounded-2xl shadow-2xl shadow-primary"
+					className="h-full w-full lg:w-2/5 flex flex-col gap-6 lg:gap-10 bg-snow-white p-6 lg:p-10 rounded-2xl shadow-2xl shadow-primary"
 					initial={{ scale: 0, opacity: 0 }}
 					animate={{ scale: 1, opacity: 1 }}
 					transition={{ type: "spring", bounce: 0.2 }}
 				>
-					<span className="text-4xl w-full text-center font-semibold">Exercises</span>
+					<span className="text-2xl lg:text-4xl w-full text-center font-semibold">Exercises</span>
 					<div className="flex flex-col overflow-y-auto gap-3 p-5">
 						{exercises?.map((exercise) => {
 							return (
@@ -262,9 +265,9 @@ export default function CreateWorkout() {
 			) : null}
 
 			<Modal open={modalOpen} disableAutoFocus className="flex items-center justify-center text-primary text-center">
-				<div className="bg-snow-white w-1/4 h-1/4 rounded-3xl p-10 text-4xl font-semibold flex flex-col">
+				<div className="bg-snow-white w-3/4 lg:w-1/4 h-1/3 lg:h-1/4 rounded-3xl p-6 lg:p-10 text-2xl lg:text-4xl font-semibold flex flex-col">
 					Are you sure you want to exit without saving?
-					<div className="mt-auto w-full flex gap-10 justify-center text-xl font-semibold">
+					<div className="mt-auto w-full flex gap-6 lg:gap-10 justify-center text-lg lg:text-xl font-semibold">
 						<button
 							onClick={() => blocker.proceed && blocker.proceed()}
 							className="hover-css bg-primary text-snow-white rounded-lg px-3 py-2 hover:bg-accent"
